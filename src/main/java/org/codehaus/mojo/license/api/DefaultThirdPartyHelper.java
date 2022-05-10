@@ -47,6 +47,8 @@ import java.util.TreeMap;
 import org.eclipse.aether.repository.RemoteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 
 /**
  * Default implementation of the {@link org.codehaus.mojo.license.api.ThirdPartyHelper}.
@@ -101,7 +103,7 @@ public class DefaultThirdPartyHelper
     /**
      * Cache of dependencies (as maven project) loaded.
      */
-    private static SortedMap<String, MavenProject> artifactCache;
+    private Cache<String, MavenProject> artifactCache = CacheBuilder.newBuilder().maximumSize(500).build();
 
     /**
      * Constructor of the helper.
@@ -136,11 +138,7 @@ public class DefaultThirdPartyHelper
      */
     public SortedMap<String, MavenProject> getArtifactCache()
     {
-        if ( artifactCache == null )
-        {
-            artifactCache = new TreeMap<>();
-        }
-        return artifactCache;
+        return new TreeMap<>(artifactCache.asMap());
     }
 
     /**
