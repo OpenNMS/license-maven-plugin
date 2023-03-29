@@ -1,5 +1,7 @@
 package org.codehaus.mojo.license.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 /*
  * #%L
  * License Maven Plugin
@@ -40,8 +42,37 @@ import java.util.List;
  * @author tchemit dev@tchemit.fr
  * @since 1.0
  */
-public class MojoHelper
+public abstract class MojoHelper
 {
+    private MojoHelper() {}
+
+    public static final Comparator<MavenProject> MAVEN_PROJECT_COMPARATOR = new Comparator<MavenProject>()
+    {
+        /**
+         * {@inheritDoc}
+         */
+        public int compare( final MavenProject o1, final MavenProject o2 )
+        {
+                return StringUtils.compareIgnoreCase(
+                        getArtifactId( o1.getArtifact() ),
+                        getArtifactId( o2.getArtifact() )
+                );
+        }
+    };
+
+    public static final Comparator<MavenProject> MAVEN_PROJECT_COMPARATOR_BY_NAME = new Comparator<MavenProject>()
+    {
+        /**
+         * {@inheritDoc}
+         */
+        public int compare( final MavenProject o1, final MavenProject o2 )
+        {
+            return StringUtils.compareIgnoreCase(
+                    getProjectName( o1 ),
+                    getProjectName( o2 )
+            );
+        }
+    };
 
     /**
      * Add the directory as a resource of the given project.
@@ -102,42 +133,6 @@ public class MojoHelper
             project.addResource( r );
         }
         return shouldAdd;
-    }
-
-    public static Comparator<MavenProject> newMavenProjectComparator()
-    {
-        return new Comparator<MavenProject>()
-        {
-            /**
-             * {@inheritDoc}
-             */
-            public int compare( MavenProject o1, MavenProject o2 )
-            {
-
-                String id1 = getArtifactId( o1.getArtifact() );
-                String id2 = getArtifactId( o2.getArtifact() );
-                return id1.compareTo( id2 );
-            }
-        };
-
-    }
-
-    public static Comparator<MavenProject> newMavenProjectComparatorByName()
-    {
-        return new Comparator<MavenProject>()
-        {
-            /**
-             * {@inheritDoc}
-             */
-            public int compare( MavenProject o1, MavenProject o2 )
-            {
-
-                String id1 = getProjectName( o1 );
-                String id2 = getProjectName( o2 );
-                return id1.compareToIgnoreCase( id2 );
-            }
-        };
-
     }
 
     protected static final double[] TIME_FACTORS = { 1000000, 1000, 60, 60, 24 };

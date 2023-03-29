@@ -132,7 +132,7 @@ public class DefaultThirdPartyTool
     /**
      * Maven project comparator.
      */
-    private final Comparator<MavenProject> projectComparator = MojoHelper.newMavenProjectComparator();
+    private final Comparator<MavenProject> projectComparator = MojoHelper.MAVEN_PROJECT_COMPARATOR;
 
     private boolean verbose;
 

@@ -58,7 +58,7 @@ public class LicenseMap
      */
     public LicenseMap()
     {
-        this( MojoHelper.newMavenProjectComparator() );
+        this( MojoHelper.MAVEN_PROJECT_COMPARATOR );
     }
 
     public LicenseMap( Comparator<MavenProject> projectComparator )
@@ -153,7 +153,7 @@ public class LicenseMap
 
     public LicenseMap toLicenseMapOrderByName()
     {
-        LicenseMap result = new LicenseMap( MojoHelper.newMavenProjectComparatorByName() );
+        LicenseMap result = new LicenseMap( MojoHelper.MAVEN_PROJECT_COMPARATOR_BY_NAME );
         result.putAll( this );
         return result;
     }

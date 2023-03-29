@@ -580,7 +580,7 @@ public abstract class AbstractThirdPartyReportMojo extends AbstractMavenReport
 
         // compute safe dependencies (with pom licenses)
         Set<MavenProject> dependenciesWithPomLicense =
-                new TreeSet<>( MojoHelper.newMavenProjectComparator() );
+                new TreeSet<>( MojoHelper.MAVEN_PROJECT_COMPARATOR );
         dependenciesWithPomLicense.addAll( projectDependencies.values() );
 
         if ( CollectionUtils.isNotEmpty( dependenciesWithNoLicense ) )
