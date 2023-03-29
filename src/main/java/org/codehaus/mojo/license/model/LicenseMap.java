@@ -28,6 +28,7 @@ import org.codehaus.mojo.license.utils.MojoHelper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,7 @@ public class LicenseMap
 {
 
     private static final long serialVersionUID = 864199843545688069L;
+    private static final String[] EMPTY_STRING_ARRAY = new String[0];
 
     public static final String UNKNOWN_LICENSE_MESSAGE = "Unknown license";
 
@@ -122,12 +124,12 @@ public class LicenseMap
      */
     public SortedMap<MavenProject, String[]> toDependencyMap()
     {
-        SortedMap<MavenProject, Set<String>> tmp = new TreeMap<>( projectComparator );
+        Map<MavenProject, Set<String>> tmp = new HashMap<>();
 
         for ( Map.Entry<String, SortedSet<MavenProject>> entry : entrySet() )
         {
             String license = entry.getKey();
-            SortedSet<MavenProject> set = entry.getValue();
+            Set<MavenProject> set = entry.getValue();
             for ( MavenProject p : set )
             {
                 Set<String> list = tmp.get( p );
@@ -145,9 +147,8 @@ public class LicenseMap
         {
             List<String> value = new ArrayList<>( entry.getValue() );
             Collections.sort( value );
-            result.put( entry.getKey(), value.toArray( new String[value.size()] ) );
+            result.put( entry.getKey(), value.toArray( EMPTY_STRING_ARRAY ) );
         }
-        tmp.clear();
         return result;
     }
 
