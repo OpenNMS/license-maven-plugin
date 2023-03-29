@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
@@ -48,15 +49,15 @@ public class LicenseMap
     extends TreeMap<String, SortedSet<MavenProject>>
 {
 
-    private static final long serialVersionUID = 864199843545688069L;
+    private static final long serialVersionUID = 2L;
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
 
     public static final String UNKNOWN_LICENSE_MESSAGE = "Unknown license";
 
-    private final Comparator<MavenProject> projectComparator;
+    private final transient Comparator<MavenProject> projectComparator;
 
     /**
-     * Default contructor.
+     * Default constructor.
      */
     public LicenseMap()
     {
@@ -154,7 +155,7 @@ public class LicenseMap
 
     public LicenseMap toLicenseMapOrderByName()
     {
-        LicenseMap result = new LicenseMap( MojoHelper.MAVEN_PROJECT_COMPARATOR_BY_NAME );
+        final LicenseMap result = new LicenseMap( MojoHelper.MAVEN_PROJECT_COMPARATOR_BY_NAME );
         result.putAll( this );
         return result;
     }
@@ -164,7 +165,7 @@ public class LicenseMap
         for ( Map.Entry<String, SortedSet<MavenProject>> entry : entrySet() )
         {
             SortedSet<MavenProject> projects = entry.getValue();
-            for ( MavenProject mavenProject : projects )
+            for ( final MavenProject mavenProject : projects )
             {
                 if ( project.equals( mavenProject ) )
                 {
@@ -173,5 +174,25 @@ public class LicenseMap
                 }
             }
         }
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + Objects.hash(projectComparator);
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final LicenseMap other = (LicenseMap) obj;
+        return Objects.equals(projectComparator, other.projectComparator);
     }
 }
