@@ -179,7 +179,7 @@ public class AggregatorAddThirdPartyMojo extends AbstractAddThirdPartyMojo
         licenseMap = new LicenseMap();
 
         Artifact pluginArtifact = (Artifact) project.getPluginArtifactMap()
-                .get( "org.codehaus.mojo:license-maven-plugin" );
+                .get( "org.opennms.maven.plugins:license-maven-plugin" );
 
         String groupId = null;
         String artifactId = null;
@@ -187,7 +187,7 @@ public class AggregatorAddThirdPartyMojo extends AbstractAddThirdPartyMojo
         if ( pluginArtifact == null )
         {
             Plugin plugin = (Plugin) project.getPluginManagement().getPluginsAsMap()
-                    .get( "org.codehaus.mojo:license-maven-plugin" );
+                    .get( "org.opennms.maven.plugins:license-maven-plugin" );
             if ( plugin != null )
             {
                 groupId = plugin.getGroupId();

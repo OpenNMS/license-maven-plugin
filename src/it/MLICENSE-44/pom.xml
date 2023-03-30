@@ -9,7 +9,7 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
+        <groupId>org.opennms.maven.plugins</groupId>
         <artifactId>license-maven-plugin</artifactId>
         <version>@project.version@</version>
         <configuration>

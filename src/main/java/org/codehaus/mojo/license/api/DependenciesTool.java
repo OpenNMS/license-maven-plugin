@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -160,21 +161,39 @@ public class DependenciesTool
             // try to get project from cache
             depMavenProject = localCache.get( id );
 
-            if ( depMavenProject != null )
+            if ( depMavenProject == null )
             {
+                for (final MavenProject reactorProject : mavenSession.getAllProjects())
+                {
+                    if (
+                            Objects.equals(reactorProject.getGroupId(), artifact.getGroupId()) &&
+                            Objects.equals(reactorProject.getArtifactId(), artifact.getArtifactId()) &&
+                            Objects.equals(reactorProject.getVersion(), artifact.getVersion())
+                    )
+                    {
+                        // found it in the reactor
+                        if ( verbose )
+                        {
+                            LOG.info( "add dependency [{}] (from reactor)", id  );
+                        }
+                        depMavenProject = reactorProject;
+                        break;
+                    }
+                }
+            } else {
                 if ( verbose )
                 {
                     LOG.info( "add dependency [{}] (from cache)", id  );
                 }
             }
-            else
+
+            if ( depMavenProject == null )
             {
-                // build project
+                // fall back to building the project from scratch
 
                 try
                 {
-                    depMavenProject
-                            = mavenProjectBuilder.build( artifact, true, projectBuildingRequest ).getProject();
+                    depMavenProject = mavenProjectBuilder.build( artifact, true, projectBuildingRequest ).getProject();
                     depMavenProject.getArtifact().setScope( artifact.getScope() );
 
                     // In case maven-metadata.xml has different artifactId, groupId or version.
@@ -205,9 +224,10 @@ public class DependenciesTool
                     LOG.info( "add dependency [{}]", id );
                 }
 
-                // store it also in cache
-                localCache.put( id, depMavenProject );
             }
+
+            // store it in cache
+            localCache.put( id, depMavenProject );
 
             // keep the project
             result.put( id, depMavenProject );

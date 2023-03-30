@@ -1,5 +1,11 @@
 package org.codehaus.mojo.license.api;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  * #%L
  * License Maven Plugin
@@ -32,11 +38,6 @@ import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.Map;
-
 /**
  * A helper to deal with freemarker templating.
  *
@@ -57,6 +58,8 @@ public class FreeMarkerHelper
 
     protected final TemplateLoader templateLoader;
 
+    private Map<String, Template> templateCache = new HashMap<>();
+
     /**
      * @return a default helper, if template is a file, then will use it as it, otherwise will have a look into
      * classloader in current package.
@@ -64,8 +67,7 @@ public class FreeMarkerHelper
     public static FreeMarkerHelper newDefaultHelper()
     {
         ClassTemplateLoader templateLoader = new ClassTemplateLoader( FreeMarkerHelper.class, "/" );
-        FreeMarkerHelper result = new FreeMarkerHelper( templateLoader );
-        return result;
+        return new FreeMarkerHelper( templateLoader );
     }
 
     /**
@@ -79,8 +81,7 @@ public class FreeMarkerHelper
         StringTemplateLoader templateLoader = new StringTemplateLoader();
         templateLoader.putTemplate( TEMPLATE, stringTemplate );
 
-        FreeMarkerHelper result = new FreeMarkerHelper( templateLoader );
-        return result;
+        return new FreeMarkerHelper( templateLoader );
     }
 
     protected FreeMarkerHelper( TemplateLoader templateLoader )
@@ -92,11 +93,17 @@ public class FreeMarkerHelper
         freemarkerConfiguration.setObjectWrapper( objectWrapper );
     }
 
-    public Template getTemplate( String templateName )
+    public Template getTemplate( final String passedTemplateName )
         throws IOException
     {
 
-        File file = new File( templateName );
+    	if (templateCache.containsKey(passedTemplateName)) {
+    		return templateCache.get(passedTemplateName);
+    	}
+
+    	String templateName = passedTemplateName;
+
+    	File file = new File( templateName );
         if ( file.exists() )
         {
 
@@ -116,6 +123,8 @@ public class FreeMarkerHelper
         {
             throw new IOException( "Could not find template " + templateName );
         }
+
+        templateCache.put(passedTemplateName, template);
         return template;
     }
 
