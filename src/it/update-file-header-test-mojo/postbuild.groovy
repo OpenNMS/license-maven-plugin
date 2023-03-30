@@ -77,20 +77,20 @@ println("Date range to use: " + dateRange)
 //TEST Java files
 //
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/java-info.java');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/java-info.java');
 assertExistsFile(file);
 
 content = file.text;
 assert assertContains( file, content, 'Copyright (C) ' + dateRange + ' License Test' );
 
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/MyBean.java');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/MyBean.java');
 assertExistsFile(file);
 
 content = file.text;
 assert assertContains(file, content, 'Copyright (C) ' + dateRange + ' License Test');
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/MyBean2.java');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/MyBean2.java');
 assertExistsFile(file);
 
 content = file.text;
@@ -98,7 +98,7 @@ assert assertContains(file, content, 'Copyright (C) 2010 Tony');
 assert assertContains(file, content, 'do NOT update!');
 assert assertNotContains(file, content, 'Fake to be removed!');
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/MyBean3.java');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/MyBean3.java');
 assertExistsFile(file);
 
 content = file.text;
@@ -106,13 +106,13 @@ assert assertContains(file, content, ' * %%Ignore-License');
 assert assertContains(file, content, ' * yet another license');
 assert assertContains(file, content, ' * Copyright (C) 2000 Codelutin Do not update!');
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/MyBean.java2');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/MyBean.java2');
 assertExistsFile(file);
 
 content = file.text;
 assert assertContains(file, content, 'Copyright (C) ' + dateRange + ' License Test');
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/MyBean2.java2');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/MyBean2.java2');
 assertExistsFile(file);
 
 content = file.text;
@@ -120,7 +120,7 @@ assert assertContains(file, content, 'Copyright (C) 2010 Tony');
 assert assertContains(file, content, 'do NOT update!');
 assert assertNotContains(file, content, 'Fake to be removed!');
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/MyBean3.java2');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/MyBean3.java2');
 assertExistsFile(file);
 
 content = file.text;
@@ -542,13 +542,13 @@ assert assertContains(file, content, '-- -');
 
 // Test on the child1 module
 
-file = new File(basedir, 'child1/src/main/java/org/codehaus/mojo2/license/MyBean.java');
+file = new File(basedir, 'child1/src/main/java/org/opennms/maven/plugins2/license/MyBean.java');
 assertExistsFile(file);
 
 content = file.text;
 assert assertContains(file, content, 'Copyright (C) ' + dateRange + ' License Test');
 
-file = new File(basedir, 'child1/src/main/java/org/codehaus/mojo2/license/MyBean2.java');
+file = new File(basedir, 'child1/src/main/java/org/opennms/maven/plugins2/license/MyBean2.java');
 assertExistsFile(file);
 
 content = file.text;
@@ -556,7 +556,7 @@ assert assertContains(file, content, 'Copyright (C) 2010 Tony');
 assert assertContains(file, content, 'do NOT update!');
 assert assertNotContains(file, content, 'Fake to be removed!');
 
-file = new File(basedir, 'child1/src/main/java/org/codehaus/mojo2/license/MyBean3.java');
+file = new File(basedir, 'child1/src/main/java/org/opennms/maven/plugins2/license/MyBean3.java');
 assertExistsFile(file);
 
 content = file.text;

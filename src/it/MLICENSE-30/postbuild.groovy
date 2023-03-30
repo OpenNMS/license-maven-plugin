@@ -49,18 +49,18 @@ def assertNotContains(file, content, expected)
   return true
 }
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/test/MyBean.java');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/test/MyBean.java');
 assertExistsFile(file);
 
 content = file.text;
 assert assertContains(file, content, 'Copyright (C) 2112 License Test');
 assert assertContains(file, content, 'MyBean.java - License Test :: MLICENSE-30 - License Test - 2112');
-assert assertContains(file, content, 'org.codehaus.mojo.license.test-MLICENSE-30-1.1');
+assert assertContains(file, content, 'org.opennms.maven.plugins.license.test-MLICENSE-30-1.1');
 assert assertContains(file, content, '#%L');
 assert assertContains(file, content, '%%');
 assert assertContains(file, content, '#L%');
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/test/MyBean2.java');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/test/MyBean2.java');
 assertExistsFile(file);
 
 content = file.text;
@@ -68,14 +68,14 @@ assert assertContains(file, content, 'Copyright (C) 2010 Tony Do not update!');
 assert assertNotContains(file, content, 'License Test :: Will be updated!');
 assert assertNotContains(file, content, 'Copyright (C) 2112 License Test');
 assert assertContains(file, content, 'MyBean2.java - License Test :: MLICENSE-30 - License Test - 2112');
-assert assertContains(file, content, 'org.codehaus.mojo.license.test-MLICENSE-30-1.1');
+assert assertContains(file, content, 'org.opennms.maven.plugins.license.test-MLICENSE-30-1.1');
 assert assertContains(file, content, 'Copyright (C) 2010 Tony Do not update!');
 assert assertNotContains(file, content, 'Fake to be removed!');
 assert assertContains(file, content, '#%L');
 assert assertContains(file, content, '%%');
 assert assertContains(file, content, '#L%');
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/test/MyBean3.java');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/test/MyBean3.java');
 assertExistsFile(file);
 
 content = file.text;

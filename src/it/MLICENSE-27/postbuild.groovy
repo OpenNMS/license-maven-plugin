@@ -20,7 +20,7 @@
  * #L%
  */
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/test/MyBean.java');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/test/MyBean.java');
 assert file.exists();
 
 content = file.text;
@@ -29,7 +29,7 @@ assert content.contains('?###');
 assert content.contains('###?');
 assert content.contains('#-#');
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/test/MyBean2.java');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/test/MyBean2.java');
 assert file.exists();
 
 content = file.text;
@@ -41,7 +41,7 @@ assert content.contains('?###');
 assert content.contains('###?');
 assert content.contains('#-#');
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/test/MyBean3.java');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/test/MyBean3.java');
 assert file.exists();
 
 content = file.text;

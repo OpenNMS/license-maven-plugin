@@ -27,12 +27,12 @@
   <!-- an empty jar to depend on -->
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.codehaus.mojo.license.test</groupId>
+  <groupId>org.opennms.maven.plugins.license.test</groupId>
   <artifactId>test-add-third-party-global-db-misc-dep</artifactId>
   <version>1</version>
 
   <parent>
-    <groupId>org.codehaus.mojo.license.test</groupId>
+    <groupId>org.opennms.maven.plugins.license.test</groupId>
     <artifactId>test-add-third-party-global-db</artifactId>
     <version>@pom.version@</version>
   </parent>

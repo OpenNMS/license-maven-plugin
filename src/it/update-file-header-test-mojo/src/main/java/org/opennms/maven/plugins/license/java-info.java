@@ -1,0 +1,1 @@
+package org.opennms.maven.plugins.license;

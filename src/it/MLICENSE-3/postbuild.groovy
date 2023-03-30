@@ -20,13 +20,13 @@
  * #L%
  */
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/plugin/test/MyBean.java');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/plugin/test/MyBean.java');
 assert file.exists();
 
 content = file.text;
 assert content.contains('Copyright (C) 2112 License Test');
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/plugin/test/MyBean2.java');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/plugin/test/MyBean2.java');
 assert file.exists();
 
 content = file.text;
@@ -35,7 +35,7 @@ assert content.contains('Copyright (C) 2112 License Test');
 assert content.contains('do NOT update!');
 assert !content.contains('Fake to be removed!');
 
-file = new File(basedir, 'src/main/java/org/codehaus/mojo/license/plugin/test/MyBean3.java');
+file = new File(basedir, 'src/main/java/org/opennms/maven/plugins/license/plugin/test/MyBean3.java');
 assert file.exists();
 
 content = file.text;

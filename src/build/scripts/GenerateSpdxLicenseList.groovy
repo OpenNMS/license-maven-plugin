@@ -30,8 +30,8 @@ def log = LoggerFactory.getLogger(this.class)
 final Path basePath = basedir.toPath()
 @Field final String licensesUrlString = 'https://raw.githubusercontent.com/spdx/license-list-data/v3.5/json/licenses.json'
 final URL licensesUrl = new URL(licensesUrlString)
-final Path spdxDir = basePath.resolve('src/main/java/org/codehaus/mojo/license/spdx')
-final Path spdxTestDir = basePath.resolve('src/test/java/org/codehaus/mojo/license/spdx')
+final Path spdxDir = basePath.resolve('src/main/java/org/opennms/maven/plugins/license/spdx')
+final Path spdxTestDir = basePath.resolve('src/test/java/org/opennms/maven/plugins/license/spdx')
 final Path licensesDir = basePath.resolve('target/spdx/licenses')
 
 /* Licenses known to deliver different content over time, although they pass our simple test here */
@@ -165,7 +165,7 @@ try {
         generator: this,
     ]
 
-    def sourceTemplate = '''package org.codehaus.mojo.license.spdx;
+    def sourceTemplate = '''package org.opennms.maven.plugins.license.spdx;
 
 /*
  * #%L
@@ -276,7 +276,7 @@ println ''
     spdxDir.resolve("SpdxLicenseListData.java").toFile().write(source)
 
 
-def testTemplate = '''package org.codehaus.mojo.license.spdx;
+def testTemplate = '''package org.opennms.maven.plugins.license.spdx;
 
 /*
  * #%L

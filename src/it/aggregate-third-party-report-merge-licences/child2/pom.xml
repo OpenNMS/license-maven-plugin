@@ -28,7 +28,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.codehaus.mojo.license.test</groupId>
+    <groupId>org.opennms.maven.plugins.license.test</groupId>
     <artifactId>test-aggregate-third-party-report-merge-licenses</artifactId>
     <version>@pom.version@</version>
   </parent>

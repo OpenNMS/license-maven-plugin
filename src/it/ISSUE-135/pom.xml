@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
 
-  <groupId>org.codehaus.mojo.license.test</groupId>
+  <groupId>org.opennms.maven.plugins.license.test</groupId>
   <artifactId>test-ISSUE-135</artifactId>
   <version>@pom.version@</version>
   <name>License Test :: ISSUE-135</name>

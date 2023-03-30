@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
 
-  <groupId>org.codehaus.mojo.license.test</groupId>
+  <groupId>org.opennms.maven.plugins.license.test</groupId>
   <artifactId>PR-64-unknown-license-64-child1</artifactId>
   <version>1.0</version>
 

@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.codehaus.mojo.license.test</groupId>
+  <groupId>org.opennms.maven.plugins.license.test</groupId>
   <artifactId>test-ISSUE-145-2</artifactId>
   <version>@pom.version@</version>
   <name>License Test :: ISSUE-145-2</name>

@@ -27,11 +27,11 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.codehaus.mojo.license.test</groupId>
+  <groupId>org.opennms.maven.plugins.license.test</groupId>
   <artifactId>test-third-party-report-global-db-consume-db</artifactId>
 
   <parent>
-    <groupId>org.codehaus.mojo.license.test</groupId>
+    <groupId>org.opennms.maven.plugins.license.test</groupId>
     <artifactId>test-third-party-report-global-db</artifactId>
     <version>@pom.version@</version>
   </parent>
@@ -43,7 +43,7 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.codehaus.mojo</groupId>
+      <groupId>org.opennms.maven.plugins</groupId>
       <artifactId>license-maven-plugin</artifactId>
       <classifier>test-third-party</classifier>
       <type>license.properties</type>

@@ -27,7 +27,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.codehaus.mojo.license.test</groupId>
+  <groupId>org.opennms.maven.plugins.license.test</groupId>
   <artifactId>exclude-transitive-deps</artifactId>
   <version>1.0</version>
 

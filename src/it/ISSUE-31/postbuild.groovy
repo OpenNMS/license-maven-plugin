@@ -39,7 +39,7 @@ def assertContains(file, content, expected)
   return true
 }
 
-file = new File(basedir, 'child2/src/main/java/org/codehaus/mojo/license/test/File1.java');
+file = new File(basedir, 'child2/src/main/java/org/opennms/maven/plugins/license/test/File1.java');
 assertExistsFile(file);
 
 content = file.text;

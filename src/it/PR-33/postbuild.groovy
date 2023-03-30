@@ -21,17 +21,17 @@
  */
 
 
-def asl2 = new File(basedir, 'child3/target/generated-resources/licenses/org.codehaus.mojo.license.test.pr-33-child2_apache_license_2.0.txt')
+def asl2 = new File(basedir, 'child3/target/generated-resources/licenses/org.opennms.maven.plugins.license.test.pr-33-child2_apache_license_2.0.txt')
 assert asl2.exists()
 assert asl2.text.contains('Version 2.0, January 2004');
 
-def asl1 = new File(basedir, 'child3/target/generated-resources/licenses/org.codehaus.mojo.license.test.pr-33-child1_apache_license_1.0.txt')
+def asl1 = new File(basedir, 'child3/target/generated-resources/licenses/org.opennms.maven.plugins.license.test.pr-33-child1_apache_license_1.0.txt')
 assert asl1.exists()
 assert asl1.text.contains('Copyright (c) 1995-1999 The Apache Group.');
 
 def licensesXml = new File(basedir, 'child3/target/generated-resources/licenses.xml');
 assert licensesXml.exists()
-assert licensesXml.text.contains('<file>org.codehaus.mojo.license.test.pr-33-child2_apache_license_2.0.txt</file>')
+assert licensesXml.text.contains('<file>org.opennms.maven.plugins.license.test.pr-33-child2_apache_license_2.0.txt</file>')
 assert licensesXml.text.contains('<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>')
-assert licensesXml.text.contains('<file>org.codehaus.mojo.license.test.pr-33-child1_apache_license_1.0.txt</file>')
+assert licensesXml.text.contains('<file>org.opennms.maven.plugins.license.test.pr-33-child1_apache_license_1.0.txt</file>')
 assert licensesXml.text.contains('<url>https://www.apache.org/licenses/LICENSE-1.0</url>')

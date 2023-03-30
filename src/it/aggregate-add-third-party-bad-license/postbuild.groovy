@@ -24,6 +24,6 @@ file = new File(basedir, 'target/generated-sources/license/THIRD-PARTY.txt');
 assert file.exists();
 content = file.text;
 assert !content.contains('the project has no dependencies.');
-assert content.contains('(Unknown license) License Test :: ano-816 - child 1 (org.codehaus.mojo.license.test:test-it-816-child1:1.0 - no-url/test-it-816-child1)');
+assert content.contains('(Unknown license) License Test :: ano-816 - child 1 (org.opennms.maven.plugins.license.test:test-it-816-child1:1.0 - no-url/test-it-816-child1)');
 
 return true;
