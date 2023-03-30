@@ -87,7 +87,7 @@
   </contributors>
 
   <prerequisites>
-    <maven>${mavenVersion}</maven>
+    <maven>3.5.4</maven>
   </prerequisites>
 
   <scm>
@@ -120,7 +120,7 @@
   </distributionManagement>
 
   <properties>
-    <mavenVersion>3.5.4</mavenVersion>
+    <mavenVersion>3.8.8</mavenVersion>
     <mojo.java.target>1.7</mojo.java.target>
 
     <processorVersion>1.3</processorVersion>
