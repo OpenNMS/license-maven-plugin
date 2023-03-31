@@ -97,13 +97,13 @@ public class FreeMarkerHelper
         throws IOException
     {
 
-    	if (templateCache.containsKey(passedTemplateName)) {
-    		return templateCache.get(passedTemplateName);
-    	}
+        if (templateCache.containsKey(passedTemplateName)) {
+            return templateCache.get(passedTemplateName);
+        }
 
-    	String templateName = passedTemplateName;
+        String templateName = passedTemplateName;
 
-    	File file = new File( templateName );
+        File file = new File( templateName );
         if ( file.exists() )
         {
 

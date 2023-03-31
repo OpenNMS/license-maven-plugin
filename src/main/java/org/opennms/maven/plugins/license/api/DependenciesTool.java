@@ -1,5 +1,14 @@
 package org.opennms.maven.plugins.license.api;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 /*
  * #%L
  * License Maven Plugin
@@ -23,27 +32,21 @@ package org.opennms.maven.plugins.license.api;
  */
 
 import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.apache.maven.artifact.repository.ArtifactRepositoryPolicy;
+import org.apache.maven.artifact.repository.MavenArtifactRepository;
+import org.apache.maven.execution.MavenSession;
+import org.apache.maven.model.building.ModelBuildingRequest;
+import org.apache.maven.project.DefaultProjectBuildingRequest;
 import org.apache.maven.project.MavenProject;
+import org.apache.maven.project.ProjectBuilder;
 import org.apache.maven.project.ProjectBuildingException;
+import org.apache.maven.project.ProjectBuildingRequest;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.opennms.maven.plugins.license.utils.MojoHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import org.apache.maven.artifact.repository.ArtifactRepository;
-import org.apache.maven.execution.MavenSession;
-import org.apache.maven.model.building.ModelBuildingRequest;
-import org.apache.maven.project.DefaultProjectBuildingRequest;
-import org.apache.maven.project.ProjectBuilder;
-import org.apache.maven.project.ProjectBuildingRequest;
 
 /**
  * A tool to deal with dependencies of a project.
@@ -120,7 +123,19 @@ public class DependenciesTool
         {
             localCache.putAll( cache );
         }
-        ProjectBuildingRequest projectBuildingRequest
+
+        final List<ArtifactRepository> repos = new ArrayList<>();
+        for (final ArtifactRepository repo : remoteRepositories) {
+            repos.add(new MavenArtifactRepository(
+                    repo.getId(),
+                    repo.getUrl(),
+                    repo.getLayout(),
+                    newQuietArtifactRepository(repo.getSnapshots()),
+                    newQuietArtifactRepository(repo.getReleases())
+            ));
+        }
+
+        final ProjectBuildingRequest projectBuildingRequest
                 = new DefaultProjectBuildingRequest( mavenSession.getProjectBuildingRequest() )
                         .setValidationLevel( ModelBuildingRequest.VALIDATION_LEVEL_MINIMAL )
                         //We already have the relevant part of the dependency tree
@@ -128,7 +143,7 @@ public class DependenciesTool
                         .setResolveDependencies( false )
                         //We don't care about plugin licensing
                         .setProcessPlugins( false )
-                        .setRemoteRepositories( remoteRepositories );
+                        .setRemoteRepositories( repos );
 
         for ( Artifact artifact : depArtifacts )
         {
@@ -163,7 +178,7 @@ public class DependenciesTool
 
             if ( depMavenProject == null )
             {
-                for (final MavenProject reactorProject : mavenSession.getAllProjects())
+                DEP: for (final MavenProject reactorProject : mavenSession.getAllProjects())
                 {
                     if (
                             Objects.equals(reactorProject.getGroupId(), artifact.getGroupId()) &&
@@ -177,7 +192,7 @@ public class DependenciesTool
                             LOG.info( "add dependency [{}] (from reactor)", id  );
                         }
                         depMavenProject = reactorProject;
-                        break;
+                        break DEP;
                     }
                 }
             } else {
@@ -268,5 +283,11 @@ public class DependenciesTool
 
         return result;
     }
+
+    private ArtifactRepositoryPolicy newQuietArtifactRepository(final ArtifactRepositoryPolicy policy) {
+        return new ArtifactRepositoryPolicy(policy.isEnabled(), ArtifactRepositoryPolicy.UPDATE_POLICY_NEVER, ArtifactRepositoryPolicy.CHECKSUM_POLICY_IGNORE);
+    }
+
+
     // CHECKSTYLE_ON: MethodLength
 }
